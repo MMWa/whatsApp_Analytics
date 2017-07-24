@@ -1,6 +1,5 @@
-# whatsApp_Analytics
-Parse Whatsapp group conversations and extract simple information.
-
+# whatsApp Analytics
+Parse WhatsApp group conversations and extract simple information.
 
 Example:
 ```
