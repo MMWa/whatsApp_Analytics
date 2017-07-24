@@ -3,7 +3,8 @@ Parse Whatsapp group conversations and extract simple information.
 
 
 Example:
-```package main
+```
+package main
 
 import (
 	"github.com/mmwa/whatsApp_Analytics"
