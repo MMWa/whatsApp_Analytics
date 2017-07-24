@@ -3,7 +3,6 @@ Parse Whatsapp group conversations and extract simple information.
 
 
 Example:
-
 ```package main
 
 import (
