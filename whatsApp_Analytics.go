@@ -1,4 +1,4 @@
-package main
+package whatsApp_Analytics
 
 import (
 	"fmt"
@@ -22,17 +22,17 @@ func (p PairList) Len() int           { return len(p) }
 func (p PairList) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
 func (p PairList) Less(i, j int) bool { return p[i].Value < p[j].Value }
 
-func check(e error) {
+func Check(e error) {
 	if e != nil {
 		panic(e)
 	}
 }
 
-func readFile(filename string) ([]string, error) {
+func ReadFile(filename string) ([]string, error) {
 	OpenedFile, err := os.Open(filename)
-	check(err)
+	Check(err)
 
-	// close fi on exit and check for its returned error
+	// close fi on exit and Check for its returned error
 	defer func() {
 		if err := OpenedFile.Close(); err != nil {
 			fmt.Println("Closing: " + OpenedFile.Name())
@@ -50,7 +50,7 @@ func readFile(filename string) ([]string, error) {
 	return lines, buffer.Err()
 }
 
-func parseData(data []string) (chatContainer, int) {
+func ParseData(data []string) (chatContainer, int) {
 	tempbuffer := make([]messageData, 0)
 	lastLine := int(0)
 
@@ -147,7 +147,7 @@ func (c *chatContainer) IncrementCount(name string) {
 func (c *chatContainer) CLeanAndVerifyNames() {
 	senders := make([]string, 0)
 
-	//loop to run through the names and check they dont have empty chat log
+	//loop to run through the names and Check they dont have empty chat log
 	for _, x := range c.senders {
 		for _, u := range c.sendersParameters[x] {
 			if u == "" {
@@ -211,25 +211,4 @@ func (c *chatContainer) FindByString(word string, reportTitle string) (map[strin
 	c.sendersCount = make(map[string]int)
 	return temp
 
-}
-
-
-
-func main() {
-	//import file into program
-	data, err := readFile("data/testSet.txt")
-	check(err)
-
-	//sanetize data and align
-	dataSet, _ := parseData(data)
-
-	//Make sure the names are names
-	dataSet.CLeanAndVerifyNames()
-	dataSet.FindByString("Happy", "Freinds Group Report report:")
-
-
-
-	fmt.Println("First One to say Eid: ",dataSet.FindFirstOccurunce("Eid"))
-
-	return
 }
